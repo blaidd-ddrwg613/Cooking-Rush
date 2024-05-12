@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class KitchenObject : MonoBehaviour {
@@ -18,8 +19,9 @@ public class KitchenObject : MonoBehaviour {
         if (kitchenObjectParent.HasKitchenObject()) {
             Debug.LogError("IKitchenObjectParent already had a KitchenObject");
         }
-        kitchenObjectParent.SetKitchenObject(this);
         
+        kitchenObjectParent.SetKitchenObject(this);
+                    
         transform.parent = kitchenObjectParent.GetKitchenObjectDisplayPoint();
         transform.localPosition = Vector3.zero;
     }

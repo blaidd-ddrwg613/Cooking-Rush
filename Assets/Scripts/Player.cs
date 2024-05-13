@@ -9,6 +9,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     [SerializeField] private float movementSpeed = 10.0f;
     [SerializeField] private LayerMask counterLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
+
+    [SerializeField] private bool IsTesting = false; 
     
     private bool isWalking;
     private Vector3 lastInteractDirection;
@@ -43,6 +45,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     private void Update() {
         HandleMovement();
         HandleInteractions();
+
+        if (IsTesting && Input.GetKeyDown(KeyCode.L)) {
+            Destroy(kitchenObject.gameObject);
+            ClearKitchenObject();
+        }
     }
 
     private void HandleMovement() { 

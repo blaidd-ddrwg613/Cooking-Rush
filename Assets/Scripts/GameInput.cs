@@ -9,6 +9,7 @@ public class GameInput : MonoBehaviour
     private PlayerInputActions playerInputActions;
 
     public event EventHandler OnInteractAction;
+    public event EventHandler OnUseAction;
         
     private void Awake()
     {
@@ -16,6 +17,11 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Enable();
         
         playerInputActions.Player.Interact.performed += InteractOnperformed;
+        playerInputActions.Player.Use.performed += UseOnperformed;
+    }
+
+    private void UseOnperformed(InputAction.CallbackContext obj) {
+        OnUseAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void InteractOnperformed(InputAction.CallbackContext obj)

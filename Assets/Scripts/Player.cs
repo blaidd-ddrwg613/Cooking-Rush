@@ -24,12 +24,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     public class OnSelectedCounterChangeEventArgs : EventArgs {
         public BaseCounter selectedCounter;
     }
-    
-    private void GameInputOnOnInteractAction(object sender, EventArgs e) {
-        if (selectedCounter != null) {
-            selectedCounter.Interact(this);
-        }
-    }
 
     private void Awake() {
         if (Instance != null) {
@@ -40,6 +34,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
     private void Start() {
         gameInput.OnInteractAction += GameInputOnOnInteractAction;
+        gameInput.OnUseAction += GameInputOnOnUseAction;
     }
 
     private void Update() {
@@ -49,6 +44,17 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         if (IsTesting && Input.GetKeyDown(KeyCode.L)) {
             Destroy(kitchenObject.gameObject);
             ClearKitchenObject();
+        }
+    }
+    private void GameInputOnOnUseAction(object sender, EventArgs e) {
+        if (selectedCounter != null) {
+            selectedCounter.Use(this);
+        }
+    }
+    
+    private void GameInputOnOnInteractAction(object sender, EventArgs e) {
+        if (selectedCounter != null) {
+            selectedCounter.Interact(this);
         }
     }
 

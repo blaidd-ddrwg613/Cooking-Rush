@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CuttingCounter : BaseCounter {
 
@@ -33,8 +32,8 @@ public class CuttingCounter : BaseCounter {
         if (HasKitchenObject()) {
             // There is a kitchenObject
             GetKitchenObject().DestroySelf();
-            Transform slicedObjectTransform = Instantiate(slicedKitchenObjectReference.prefab);
-            slicedObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+
+            KitchenObject.SpawnKitchenObject(slicedKitchenObjectReference, this);
         }
     }
 }

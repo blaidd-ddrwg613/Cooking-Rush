@@ -7,6 +7,14 @@ public class KitchenObject : MonoBehaviour {
     
     [SerializeField] private KitchenObjectSo kitchenObjectSo;
     private IKitchenObjectParent kitchenObjectParent;
+
+    public static KitchenObject SpawnKitchenObject(KitchenObjectSo kitchenObjectSo, IKitchenObjectParent kitchenObjectParent) {
+        Transform kitchenObjectTransform = Instantiate(kitchenObjectSo.prefab);
+        KitchenObject kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
+        kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
+
+        return kitchenObject;
+    }
     
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
         if (this.kitchenObjectParent != null) {
